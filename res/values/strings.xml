@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DashBoard</string>
+    <string name="information">Information</string>
+    <string name="about">About</string>
+    <string name="product">Product Model</string>
+    <string name="product_desc">"F3:Warm white steady--Multi steady--OFF\nF4:Warm white steady--Multi steady--Multi and warm white transform fade--OFF\nF5:Warm white steady--Multi steady--Warm white fade--multi and warm white transform fade--OFF\nF6:Warm white steady--warm white flash--Multi steady--Multi flash--OFF"</string>
+    <string name="company_address">东莞市南城区亨美水濂澎洞工业区C区C6栋\nBuilding C6,Block C,Shuilian Pengdong Industrial area,Hengmei,Nancheng\n\nTel:(86)769-82310676 83038752\nFax:(86)769-83038753</string>
+    <string name="app_version">APP Version</string>
+    <string name="app_version_text">XmasTree Ver 1.0</string>
+        
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="ble_not_supported">手机不支持4.0蓝牙</string>
+    <string name="unknown_device">未知设备</string>
+    <string name="device_connected">已连接</string>
+    <string name="device_discontected">未连接</string>
+    <string name="no_selected_device">未选择已连接的设备</string>
+    <string name="company_name">飞扬灯饰科技有限公司\nJETMAX LIGHTING CO LTD.</string>
+
+</resources>

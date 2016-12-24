@@ -26,8 +26,7 @@
         android:name="com.dashboard.ble.BLEApplication"
         >
         <activity 
-            android:name="com.dashboard.ble.activity.MainActivity"
-            android:launchMode="singleTask"
+            android:name="com.dashboard.ble.activity.SplashActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             >
@@ -37,12 +36,33 @@
             </intent-filter>
         </activity>
         <activity 
+            android:name="com.dashboard.ble.activity.MenuActivity"
+            android:launchMode="singleTask"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity 
+            android:name="com.dashboard.ble.activity.DashBoardActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
+        <activity 
             android:name="com.dashboard.ble.activity.ControlActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
         <activity 
             android:name="com.dashboard.ble.activity.AboutActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
+        <activity 
+            android:name="com.dashboard.ble.activity.FunctionActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />

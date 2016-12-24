@@ -19,5 +19,9 @@
     <string name="device_discontected">未连接</string>
     <string name="no_selected_device">未选择已连接的设备</string>
     <string name="company_name">飞扬灯饰科技有限公司\nJETMAX LIGHTING CO LTD.</string>
+    
+    <string name="menu_dashborad">Dash Board</string>
+    <string name="menu_dualcolor">Dual Color 12 Functions</string>
+    <string name="menu_rgb">RGB 40 Functions</string>
 
 </resources>

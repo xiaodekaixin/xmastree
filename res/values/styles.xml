@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -19,6 +19,19 @@
     
     <style name="NoTitleStyle" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
+    </style>
+    
+    <style name="MenuItemStyle">
+        <item name="android:background">@drawable/menu_item_bg</item>
+        <item name="android:layout_marginTop">@dimen/menu_item_vertical_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="MenuItemTitleStyle">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/menu_item_text_size</item>
+        <item name="android:layout_marginTop">@dimen/menu_item_title_vertical_margin</item>
     </style>
 
 </resources>

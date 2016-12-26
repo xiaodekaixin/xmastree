@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_xmastree_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/menu_activity_padding" >
+
+    <LinearLayout
+        android:id="@+id/menu_dashboard"
+        style="@style/MenuItemStyle">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher" />
+
+        <TextView
+            style="@style/MenuItemTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_dashborad" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_dualcolor"
+        style="@style/MenuItemStyle">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher" />
+
+        <TextView
+            style="@style/MenuItemTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_dualcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_rgb"
+        style="@style/MenuItemStyle">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher" />
+
+        <TextView
+            style="@style/MenuItemTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_rgb" />
+    </LinearLayout>
+
+</LinearLayout>

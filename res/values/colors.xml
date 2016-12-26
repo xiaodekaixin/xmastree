@@ -6,4 +6,6 @@
     <color name="line_color">#C2C2C2</color>
     <color name="all_background">#161d30</color>
     <color name="text_color">#ffffff</color>
+    
+    <color name="clock_item_bg_color">#0B6885</color>
 </resources>

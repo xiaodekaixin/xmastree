@@ -7,8 +7,12 @@ import android.widget.ImageView;
 import com.dashboard.ble.R;
 
 
-public class FunctionActivity extends BaseActivity {
+public class FunctionActivity extends BaseActivity implements View.OnClickListener {
 	private ImageView imgBackIcon;
+	private ImageView imgClose;
+	private ImageView imgTree;
+	private ImageView imgMusic;
+	private ImageView imgClock;
 	
 	@Override
 	protected void onCreate() {
@@ -20,6 +24,11 @@ public class FunctionActivity extends BaseActivity {
 		findViewById(R.id.tvTitle).setVisibility(View.GONE);
 		imgBackIcon = (ImageView) findViewById(R.id.imgBackIcon);
 		imgBackIcon.setVisibility(View.VISIBLE);
+		
+		imgClose = (ImageView)findViewById(R.id.imgClose);
+		imgTree = (ImageView)findViewById(R.id.imgTree);
+		imgMusic = (ImageView)findViewById(R.id.imgMusic);
+		imgClock = (ImageView)findViewById(R.id.imgClock);
 	}
 
 	@Override
@@ -30,12 +39,34 @@ public class FunctionActivity extends BaseActivity {
 				finish();
 			}
 		});
+		
+		imgClose.setOnClickListener(this);
+		imgTree.setOnClickListener(this);
+		imgMusic.setOnClickListener(this);
+		imgClock.setOnClickListener(this);
 	}
 
 	@Override
 	protected void initViewData() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		int viewId = v.getId();
+		switch (viewId) {
+		case R.id.imgClose:
+			break;
+		case R.id.imgTree:
+			break;
+		case R.id.imgMusic:
+			break;
+		case R.id.imgClock:
+			break;
+		default:
+			break;
+		}
 	}
 
 }

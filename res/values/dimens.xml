@@ -10,5 +10,8 @@
     <dimen name="menu_item_vertical_margin">20dip</dimen>
     
     <dimen name="menu_item_title_vertical_margin">5dip</dimen>
-
+    <dimen name="function_item_vertical_margin">20dip</dimen>
+    
+    <dimen name="clock_item_horizontal_margin">60dip</dimen>
+    <dimen name="clock_item_clock_size">30dip</dimen>
 </resources>

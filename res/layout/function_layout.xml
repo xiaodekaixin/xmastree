@@ -7,12 +7,34 @@
    	
     <include layout="@layout/main_title_layout"/>
     
-    <TextView 
-        android:layout_width="wrap_content"
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to Function page!"
-        android:textColor="@color/text_color"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"/>
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/function_item_vertical_margin">
+        
+        <ImageView 
+            android:id="@+id/imgClose"
+            style="@style/FunctionItemStyle"
+            android:src="@drawable/ic_close"/>
+        
+        <ImageView 
+            android:id="@+id/imgTree"
+            style="@style/FunctionItemStyle"
+            android:src="@drawable/ic_tree"/>
+        
+        <ImageView 
+            android:id="@+id/imgMusic"
+            style="@style/FunctionItemStyle"
+            android:src="@drawable/ic_music"/>
+        
+        <ImageView 
+            android:id="@+id/imgClock"
+            style="@style/FunctionItemStyle"
+            android:src="@drawable/ic_clock"/>
+        
+    </LinearLayout>
 
 </RelativeLayout>

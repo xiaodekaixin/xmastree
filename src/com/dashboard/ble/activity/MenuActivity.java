@@ -1,12 +1,8 @@
 package com.dashboard.ble.activity;
 
 import android.content.Intent;
-import android.graphics.DashPathEffect;
-import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.dashboard.ble.R;

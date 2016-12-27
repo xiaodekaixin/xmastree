@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_xmastree_bg" >
+
+    <include layout="@layout/main_title_layout" />
+    
+    <ListView 
+        android:id="@+id/clockListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:dividerHeight="15dip"
+        android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@android:color/transparent"
+        android:divider="@android:color/transparent"  
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="@dimen/clock_list_horizontal_margin"
+        android:layout_marginRight="@dimen/clock_list_horizontal_margin"
+        >
+        
+    </ListView>
+
+    <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/twoHourLayout"
+            style="@style/ClockItemLayoutStyle" >
+
+            <TextView
+                style="@style/ClockItemTitleStyle"
+                android:text="@string/two_hour" />
+
+            <ImageView style="@style/ClockItemImgStyle" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fourHourLayout"
+            style="@style/ClockItemLayoutStyle" >
+
+            <TextView
+                style="@style/ClockItemTitleStyle"
+                android:text="@string/four_hour" />
+
+            <ImageView style="@style/ClockItemImgStyle" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/sixHourLayout"
+            style="@style/ClockItemLayoutStyle" >
+
+            <TextView
+                style="@style/ClockItemTitleStyle"
+                android:text="@string/six_hour" />
+
+            <ImageView style="@style/ClockItemImgStyle" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/eightHourLayout"
+            style="@style/ClockItemLayoutStyle" >
+
+            <TextView
+                style="@style/ClockItemTitleStyle"
+                android:text="@string/eight_hour" />
+
+            <ImageView style="@style/ClockItemImgStyle" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tenHourLayout"
+            style="@style/ClockItemLayoutStyle" >
+
+            <TextView
+                style="@style/ClockItemTitleStyle"
+                android:text="@string/ten_hour" />
+
+            <ImageView style="@style/ClockItemImgStyle" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/twelveHourLayout"
+            style="@style/ClockItemLayoutStyle" >
+
+            <TextView
+                style="@style/ClockItemTitleStyle"
+                android:text="@string/twelve_hour" />
+
+            <ImageView style="@style/ClockItemImgStyle" />
+        </FrameLayout>
+    </LinearLayout> -->
+
+    <TextView
+        android:id="@+id/tvRemainTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="10dip"
+        android:text="@string/clock_remain_time"
+        android:textColor="@color/text_color"
+        android:textSize="22sp" />
+
+</RelativeLayout>

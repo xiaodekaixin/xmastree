@@ -23,5 +23,14 @@
     <string name="menu_dashborad">Dash Board</string>
     <string name="menu_dualcolor">Dual Color 12 Functions</string>
     <string name="menu_rgb">RGB 40 Functions</string>
+    
+    <string name="two_hour">2 Hour</string>
+    <string name="four_hour">4 Hour</string>
+    <string name="six_hour">6 Hour</string>
+    <string name="eight_hour">8 Hour</string>
+    <string name="ten_hour">10 Hour</string>
+    <string name="twelve_hour">12 Hour</string>
+    
+    <string name="clock_remain_time">"倒计时:%1$d时%2$s分"</string>
 
 </resources>

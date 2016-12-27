@@ -33,5 +33,40 @@
         <item name="android:textSize">@dimen/menu_item_text_size</item>
         <item name="android:layout_marginTop">@dimen/menu_item_title_vertical_margin</item>
     </style>
-
+    
+    <style name="FunctionItemStyle">
+        <item name="android:layout_width">wrap_content</item>:
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="ClockItemLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dip</item>
+        <item name="android:paddingBottom">10dip</item>
+        <item name="android:background">@drawable/ic_clock_item_bg</item>
+        <item name="android:layout_marginLeft">@dimen/clock_item_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/clock_item_horizontal_margin</item>
+    </style>
+    
+    <style name="ClockItemTitleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/menu_item_text_size</item>
+    </style>
+    
+    <style name="ClockItemImgStyle">
+        <item name="android:layout_width">@dimen/clock_item_clock_size</item>
+        <item name="android:layout_height">@dimen/clock_item_clock_size</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">5dip</item>
+        <item name="android:src">@drawable/ic_clock_mark</item>
+        <item name="android:contentDescription">""</item>
+        <item name="android:tag">icon</item>
+        <item name="android:visibility">gone</item>
+    </style>
 </resources>

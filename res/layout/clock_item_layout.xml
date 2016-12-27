@@ -1,0 +1,14 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ClockItemLayoutStyle" >
+
+    <TextView
+        android:id="@+id/tvClockTitle"
+        style="@style/ClockItemTitleStyle"
+        android:text="@string/six_hour" />
+
+    <ImageView 
+        android:id="@+id/imgClockMark"
+        style="@style/ClockItemImgStyle" />
+
+</FrameLayout>

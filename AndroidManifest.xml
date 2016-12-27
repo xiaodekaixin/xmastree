@@ -7,66 +7,80 @@
     <uses-sdk
         android:minSdkVersion="18"
         android:targetSdkVersion="18" />
-	<!-- 读写外部存储器的权限 -->
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-	<!-- 蓝牙所需的权限 --> 
-	<uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <!-- 读写外部存储器的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 蓝牙所需的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
     <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
-	
+
     <application
+        android:name="com.dashboard.ble.BLEApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/NoTitleStyle"
         android:persistent="true"
-        android:name="com.dashboard.ble.BLEApplication"
-        >
-        <activity 
+        android:theme="@style/NoTitleStyle" >
+        <activity
             android:name="com.dashboard.ble.activity.SplashActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            >
-             <intent-filter>
+            android:screenOrientation="portrait" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
+        <activity
             android:name="com.dashboard.ble.activity.MenuActivity"
-            android:launchMode="singleTask"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            >
-             <intent-filter>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity 
+        <activity
             android:name="com.dashboard.ble.activity.DashBoardActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            />
-        <activity 
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.dashboard.ble.activity.ControlActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            />
-        <activity 
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.dashboard.ble.activity.AboutActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            />
-        <activity 
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.dashboard.ble.activity.FunctionActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            />
-        <service android:name="com.dashboard.ble.service.BluetoothLeService" android:enabled="true"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dashboard.ble.activity.ClockActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+
+        <receiver android:name="com.dashboard.ble.receiver.ClockReceiver" >
+            <intent-filter>
+                <action android:name="com.dashboard.ble.receiver" />
+                <action android:name="android.intent.action.ALARM_RECEIVER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.dashboard.ble.service.BluetoothLeService"
+            android:enabled="true" />
     </application>
 
 </manifest>

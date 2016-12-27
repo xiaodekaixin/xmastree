@@ -11,11 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:divider="@null"
-        android:dividerHeight="0dip"
+        android:dividerHeight="15dip"
         android:cacheColorHint="@android:color/transparent"
-        android:listSelector="@null"
+        android:listSelector="@android:color/transparent"
+        android:divider="@android:color/transparent"  
         android:background="@android:color/transparent"
+        android:layout_marginLeft="@dimen/clock_list_horizontal_margin"
+        android:layout_marginRight="@dimen/clock_list_horizontal_margin"
         >
         
     </ListView>

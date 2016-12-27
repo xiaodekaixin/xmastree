@@ -14,4 +14,6 @@
     
     <dimen name="clock_item_horizontal_margin">60dip</dimen>
     <dimen name="clock_item_clock_size">30dip</dimen>
+    
+    <dimen name="clock_list_horizontal_margin">30dip</dimen>
 </resources>

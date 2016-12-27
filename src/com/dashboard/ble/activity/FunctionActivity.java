@@ -1,5 +1,6 @@
 package com.dashboard.ble.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -57,16 +58,23 @@ public class FunctionActivity extends BaseActivity implements View.OnClickListen
 		int viewId = v.getId();
 		switch (viewId) {
 		case R.id.imgClose:
+			finish();
 			break;
 		case R.id.imgTree:
 			break;
 		case R.id.imgMusic:
 			break;
 		case R.id.imgClock:
+			showClockActivity();
 			break;
 		default:
 			break;
 		}
 	}
-
+	
+	private void showClockActivity() {
+		Intent intent = new Intent();
+		intent.setClass(this, ClockActivity.class);
+		startActivity(intent);
+	}
 }

@@ -31,6 +31,6 @@
     <string name="ten_hour">10 Hour</string>
     <string name="twelve_hour">12 Hour</string>
     
-    <string name="clock_remain_time">"倒计时:1s时2s分"</string>
+    <string name="clock_remain_time">"倒计时:%1$d时%2$s分"</string>
 
 </resources>

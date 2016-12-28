@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_xmastree_bg" >
+
+    <include layout="@layout/main_title_layout" />
+    
+    <GridView 
+        android:id="@+id/ledGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="@dimen/led_grid_vertial_margin"
+        android:layout_marginLeft="@dimen/clock_list_horizontal_margin"
+        android:layout_marginRight="@dimen/clock_list_horizontal_margin"
+        android:numColumns="3"
+        android:columnWidth="90dip"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dip"
+        android:horizontalSpacing="10dip"
+        >
+    </GridView>
+</RelativeLayout>

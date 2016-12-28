@@ -69,6 +69,14 @@
             android:name="com.dashboard.ble.activity.ClockActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dashboard.ble.activity.LedGridActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dashboard.ble.activity.ShakeActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
 
         <receiver android:name="com.dashboard.ble.receiver.ClockReceiver" >
             <intent-filter>

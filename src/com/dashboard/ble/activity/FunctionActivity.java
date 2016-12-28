@@ -61,6 +61,7 @@ public class FunctionActivity extends BaseActivity implements View.OnClickListen
 			finish();
 			break;
 		case R.id.imgTree:
+			showLedGridActivity();
 			break;
 		case R.id.imgMusic:
 			break;
@@ -75,6 +76,12 @@ public class FunctionActivity extends BaseActivity implements View.OnClickListen
 	private void showClockActivity() {
 		Intent intent = new Intent();
 		intent.setClass(this, ClockActivity.class);
+		startActivity(intent);
+	}
+	
+	private void showLedGridActivity() {
+		Intent intent = new Intent();
+		intent.setClass(this, LedGridActivity.class);
 		startActivity(intent);
 	}
 }

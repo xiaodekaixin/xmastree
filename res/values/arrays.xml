@@ -17,4 +17,61 @@
         <item>10</item>
         <item>12</item>
     </integer-array>
+    
+    <string-array name="dualColorLedArray">
+        <item>Solid Red</item>
+        <item>Solid Yellow</item>
+        <item>Solid Blue</item>
+        <item>Solid Green</item>
+        <item>Solid Cyan</item>
+        <item>Solid Purple</item>
+        <item>Solid Ice White</item>
+        <item>Solid Multi</item>
+        <item>Fading Red</item>
+        <item>Fading Yellow</item>
+        <item>Fading Blue</item>
+        <item>Fading Green</item>
+        <item>Fading Cyan</item>
+        <item>Fading Purple</item>
+        <item>Fading Ice White</item>
+        <item>Fading Multi</item>
+        <item>Red/White Twinkle</item>
+        <item>Yellow/White Twinkle</item>
+        <item>Blue/White Twinkle</item>
+        <item>Cyan/White Twinkle</item>
+        <item>Purple/White Twinkle</item>
+        <item>Ice White Twinkle</item>
+        <item>Multi/White Twinkle</item>
+        <item>Random Red</item>
+        <item>Random Yellow</item>
+        <item>Random Blue</item>
+        <item>Random Green</item>
+        <item>Random Cyan</item>
+        <item>Random Purple</item>
+        <item>Random Ice White</item>
+        <item>Random Multi</item>
+        <item>Red/Blue Flash</item>
+        <item>Red/Green Flash</item>
+        <item>Red/Purple Flash</item>
+        <item>Red/Cyan Flash</item>
+        <item>Red/Ice White Flash</item>
+        <item>Multi/Ice White Flash</item>
+        <item>Multi Twinkle</item>
+        <item>All Colors Fading</item>
+    </string-array>
+    
+    <string-array name="twelveLedArray">
+        <item>暖白随音乐跳动</item>
+        <item>彩光随音乐跳动</item>
+        <item>暖白彩光渐变随音乐跳动</item>
+        <item>暖白常亮</item>
+        <item>彩光常亮</item>
+        <item>暖白渐暗渐明</item>
+        <item>彩光渐暗渐明</item>
+        <item>暖白彩光渐变</item>
+        <item>暖白光闪</item>
+        <item>彩光闪</item>
+        <item>暖白彩光对闪(慢速)</item>
+        <item>暖白彩光对闪(快速)</item>
+    </string-array>
 </resources>

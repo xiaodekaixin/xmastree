@@ -16,4 +16,5 @@
     <dimen name="clock_item_clock_size">30dip</dimen>
     
     <dimen name="clock_list_horizontal_margin">30dip</dimen>
+    <dimen name="led_grid_vertial_margin">50dip</dimen>
 </resources>

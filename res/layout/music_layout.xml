@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_xmastree_bg"
+   	>
+   	
+    <TextView 
+        android:id="@+id/christmasTreeMusic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chrismas_tree_music"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dip"
+       	android:layout_marginLeft="30dip"
+       	android:drawableTop="@drawable/ic_launcher"
+        />
+    
+    <TextView 
+        android:id="@+id/myMusic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_music"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dip"
+       	android:layout_marginRight="30dip"
+       	android:drawableTop="@drawable/ic_launcher"
+        />
+    
+    <FrameLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+    	<ImageView 
+    	    android:id="@+id/rotatePicture"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:background="@drawable/ic_music"
+    	    android:layout_gravity="center"
+    	    />
+    	<ImageView 
+    	    android:id="@+id/pausePicture"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:background="@drawable/ic_add"
+    	    android:layout_gravity="center"
+    	    />
+    	<ImageView 
+    	    android:id="@+id/playPicture"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:background="@drawable/ic_add"
+    	    android:layout_gravity="center"
+    	    android:visibility="gone"
+    	    />
+    </FrameLayout>
+
+</RelativeLayout>

@@ -3,7 +3,6 @@ package com.dashboard.ble.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,9 +13,7 @@ import android.widget.TextView;
 
 import com.dashboard.ble.R;
 import com.dashboard.ble.activity.LedGridActivity;
-import com.dashboard.ble.adapter.ClockListAdapter.ViewHolder;
 import com.dashboard.ble.model.LedInfo;
-import com.lidroid.xutils.db.sqlite.CursorUtils.FindCacheSequence;
 
 public class LedGridAdapter extends BaseAdapter {
 	private Context mContext;
@@ -53,11 +50,11 @@ public class LedGridAdapter extends BaseAdapter {
         	viewHolder.imgItemLogo = (ImageView)convertView.findViewById(R.id.imgLogo);
         	viewHolder.tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
         	convertView.setTag(viewHolder);
-        	convertView.setTag(10, position);
+        	convertView.setTag(R.id.led_item_position, position);
         	convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					int pos = (Integer) v.getTag(10);
+					int pos = (Integer) v.getTag(R.id.led_item_position);
 					((LedGridActivity)mContext).refreshLedGrid(pos);
 				}
 			});

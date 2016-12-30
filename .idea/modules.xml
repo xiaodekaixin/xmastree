@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DashBoard.iml" filepath="$PROJECT_DIR$/.idea/DashBoard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DashBoard.iml" filepath="$PROJECT_DIR$/DashBoard.iml" />
     </modules>
   </component>
 </project>

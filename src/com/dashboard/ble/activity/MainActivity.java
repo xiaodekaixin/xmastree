@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -24,14 +25,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private MusicService musicService;
     private SeekBar seekBar;
     private TextView musicStatus, musicTime;
-    private Button btnPlayOrPause, btnStop, btnQuit;
+    private Button btnPlayOrPause;
     private SimpleDateFormat time = new SimpleDateFormat("m:ss");
+
+    public android.os.Handler handler = new android.os.Handler();
     
     private ServiceConnection sc = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             musicService = ((MusicService.MyBinder)iBinder).getService();
             Log.d("hint", "service is connected"+musicService);
+            // 请求权限
         }
 
         @Override
@@ -40,26 +44,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Log.d("hint", "service is disconnected");
         }
     };
-    private void bindServiceConnection() {
-        Intent intent = new Intent(this, MusicService.class);
-        bindService(intent, sc, Context.BIND_AUTO_CREATE);
-        startService(intent);
-    }
-    
-    public android.os.Handler handler = new android.os.Handler();
+
+
     public Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(musicService.mp.isPlaying()) {
-                musicStatus.setText(getResources().getString(R.string.playing));
-                btnPlayOrPause.setText(getResources().getString(R.string.pause).toUpperCase());
-            } else {
-                musicStatus.setText(getResources().getString(R.string.pause));
-                btnPlayOrPause.setText(getResources().getString(R.string.play).toUpperCase());
+            if (musicService != null) {
+                MediaPlayer player = musicService.mPlayer;
+                if (player.isPlaying()) {
+                    musicStatus.setText(getResources().getString(R.string.playing));
+                    btnPlayOrPause.setText(getResources().getString(R.string.pause).toUpperCase());
+                } else {
+                    musicStatus.setText(getResources().getString(R.string.pause));
+                    btnPlayOrPause.setText(getResources().getString(R.string.play).toUpperCase());
+                }
+                int currentPosition = player.getCurrentPosition();
+                int duration = player.getDuration();
+                musicTime.setText(time.format(currentPosition) + "/" + time.format(duration));
+                seekBar.setProgress(currentPosition);
+                seekBar.setMax(duration);
             }
-            musicTime.setText(time.format(musicService.mp.getCurrentPosition()) + "/" + time.format(musicService.mp.getDuration()));
-            seekBar.setProgress(musicService.mp.getCurrentPosition());
-            handler.postDelayed(runnable, 100);
+            handler.postDelayed(runnable, 200);
         }
     };
 
@@ -68,15 +73,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Log.d("hint", "ready to new MusicService");
-//        musicService = new MusicService();
-//        Log.d("hint", "finish to new MusicService");
-        
-
         seekBar = (SeekBar)this.findViewById(R.id.MusicSeekBar);
-//        seekBar.setProgress(musicService.mp.getCurrentPosition());
-//        seekBar.setMax(musicService.mp.getDuration());
-
         musicStatus = (TextView)this.findViewById(R.id.MusicStatus);
         musicTime = (TextView)this.findViewById(R.id.MusicTime);
 
@@ -92,17 +89,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser && musicService != null) {
-                    musicService.mp.seekTo(seekBar.getProgress());
+                    musicService.mPlayer.seekTo(seekBar.getProgress());
                 }
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
     }
@@ -110,55 +105,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onResume() {
     	super.onResume();
-    	refreshMusicUi();
+        initMusicState();
     }
-    
-    private void refreshMusicUi() {
-    	if(musicService != null) {
-    		if(musicService.mp.isPlaying()) {
-                musicStatus.setText(getResources().getString(R.string.playing));
-            } else {
-                musicStatus.setText(getResources().getString(R.string.pause));
-            }
-            seekBar.setProgress(musicService.mp.getCurrentPosition());
-            seekBar.setMax(musicService.mp.getDuration());
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacks(runnable);
+    }
+
+    private void initMusicState() {
+        if (musicService != null) {
+            seekBar.setProgress(musicService.mPlayer.getCurrentPosition());
+            seekBar.setMax(musicService.mPlayer.getDuration());
             handler.post(runnable);
             Log.d("hint", "handler post runnable");
-    	}
+        }
     }
 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.BtnPlayorPause:
             	if(musicService != null) {
-            		musicService.playOrPause();
-            		refreshMusicUi();
+            		musicService.playOrPauseMusic();
             	}
-                break;
-            case R.id.BtnStop:
-            	if(musicService != null) {
-            		musicService.stop();
-                    seekBar.setProgress(0);
-                    handler.removeCallbacks(runnable);
-            	}
-                break;
-            case R.id.BtnQuit:
-                handler.removeCallbacks(runnable);
-                unbindService(sc);
-                try {
-                    System.exit(0);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                initMusicState();
                 break;
             case R.id.btnPre:
             	if(musicService != null) {
-            		musicService.preMusic();
+            		musicService.playMusic();
             	}
                 break;
             case R.id.btnNext:
             	if(musicService != null) {
-            		musicService.nextMusic();
+                    musicService.playMusic();
             	}
                 break;
             default:
@@ -172,4 +152,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onDestroy();
     }
 
+    private void bindServiceConnection() {
+        Intent intent = new Intent(this, MusicService.class);
+        bindService(intent, sc, Context.BIND_AUTO_CREATE);
+        startService(intent);
+    }
 }

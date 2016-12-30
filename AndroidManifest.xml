@@ -30,7 +30,7 @@
         android:persistent="true"
         android:theme="@style/NoTitleStyle" >
         <activity
-            android:name="com.dashboard.ble.activity.MainActivity"
+            android:name="com.dashboard.ble.activity.SplashActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -78,8 +78,11 @@
             android:name="com.dashboard.ble.activity.ShakeActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
-
-        <receiver 
+        <activity
+                android:name="com.dashboard.ble.activity.MusicActivity"
+                android:configChanges="keyboardHidden|orientation"
+                android:screenOrientation="portrait" />
+        <receiver
             android:name="com.dashboard.ble.receiver.ClockReceiver">
             <intent-filter>
                 <action android:name="com.dashboard.ble.receiver" />

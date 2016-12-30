@@ -8,114 +8,79 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.io.IOException;
+
 /**
  * Created by West on 2015/11/10.
  */
 public class MusicService extends Service {
 
-    private String[] musicDir = new String[]{
-    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
-    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
-    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
-    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
-    };
-    private int musicIndex = 1;
-    
-    private String mMusicDirPath = "";
-    
-    public MediaPlayer mp = new MediaPlayer();
-//    public MusicService() {
-//        try {
-//        	String state = Environment.getExternalStorageState();
-//        	if(state.equals(Environment.MEDIA_MOUNTED)) {
-//        		mMusicDirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath();
-//        	}
-//            mp.setDataSource(mMusicDirPath+"/demo.mp3");
-//            mp.prepare();
-//            musicIndex = 1;
-//        } catch (Exception e) {
-//            Log.d("hint","can't get to the song");
-//            e.printStackTrace();
-//        }
-//    }
-    
+//    private String[] musicDir = new String[]{
+//    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
+//    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
+//    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
+//    		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath()+"/demo.mp3",
+//    };
+
+    private String mMusicFilePath = "";
+    public MediaPlayer mPlayer = new MediaPlayer();
+
     @Override
     public void onCreate() {
-    	super.onCreate();
-    	try {
-        	String state = Environment.getExternalStorageState();
-        	if(state.equals(Environment.MEDIA_MOUNTED)) {
-        		mMusicDirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath();
-        	}
-            mp.setDataSource(mMusicDirPath+"/demo.mp3");
-            mp.prepare();
-            musicIndex = 1;
+        super.onCreate();
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
+            mMusicFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/demo.mp3";
+        }
+    }
+
+    public void setMusicFilePath(String musicFilePath) {
+        this.mMusicFilePath = musicFilePath;
+    }
+
+    public void stopMusic() {
+        try {
+            mPlayer.stop();
+            mPlayer.prepare();
+            mPlayer.seekTo(0);
         } catch (Exception e) {
-            Log.d("hint","can't get to the song");
+            Log.d("hint","stop music,fail:" + e.getMessage());
             e.printStackTrace();
         }
+        Log.d("hint","stop music");
     }
-    
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-    	return super.onStartCommand(intent, flags, startId);
-    }
-    
-    public void playOrPause() {
-        if(mp.isPlaying()){
-            mp.pause();
+
+    public void playOrPauseMusic() {
+        int duration = mPlayer.getDuration();
+        int currentPosition = mPlayer.getCurrentPosition();
+        Log.d("hint", "playing music,currentPos=" + currentPosition + ",duration=" + duration);
+        if (currentPosition > 0 && currentPosition < duration) {
+            // 播放已经开始
+            if (mPlayer.isPlaying()) {
+                mPlayer.pause();
+            } else {
+                mPlayer.start();
+            }
+        } else if (currentPosition <= 0) {
+            playMusic();
         } else {
-            mp.start();
+            stopMusic();
         }
     }
-    public void stop() {
-        if(mp != null) {
-            mp.stop();
-            try {
-                mp.prepare();
-                mp.seekTo(0);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+    public void playMusic() {
+        try {
+            mPlayer.stop();
+            mPlayer.reset();
+            mPlayer.setDataSource(mMusicFilePath);
+            mPlayer.prepare();
+            mPlayer.seekTo(0);
+            mPlayer.start();
+        } catch (IOException e) {
+            Log.d("hint", "play music,fail:" + e.getMessage());
+            e.printStackTrace();
         }
-    }
-    public void nextMusic() {
-        if(mp != null && musicIndex < 3) {
-            mp.stop();
-            try {
-                mp.reset();
-                mp.setDataSource(musicDir[musicIndex+1]);
-                musicIndex++;
-                mp.prepare();
-                mp.seekTo(0);
-                mp.start();
-            } catch (Exception e) {
-                Log.d("hint", "can't jump next music");
-                e.printStackTrace();
-            }
-        }
-    }
-    public void preMusic() {
-        if(mp != null && musicIndex > 0) {
-            mp.stop();
-            try {
-                mp.reset();
-                mp.setDataSource(musicDir[musicIndex-1]);
-                musicIndex--;
-                mp.prepare();
-                mp.seekTo(0);
-                mp.start();
-            } catch (Exception e) {
-                Log.d("hint", "can't jump pre music");
-                e.printStackTrace();
-            }
-        }
-    }
-    @Override
-    public void onDestroy() {
-        mp.stop();
-        mp.release();
-        super.onDestroy();
+        Log.d("hint", "play music,path:" + mMusicFilePath);
     }
 
     /**
@@ -132,5 +97,12 @@ public class MusicService extends Service {
         public MusicService getService() {
             return MusicService.this;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        mPlayer.stop();
+        mPlayer.release();
+        super.onDestroy();
     }
 }

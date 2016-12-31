@@ -61,9 +61,12 @@ public class ShakeActivity extends BaseActivity {
     protected void setupView() {
         mImgUp = (RelativeLayout) findViewById(R.id.shakeImgUp);
         mImgDn = (RelativeLayout) findViewById(R.id.shakeImgDown);
+
         mImgUpLine = (LinearLayout) findViewById(R.id.shakeImgUp_line);
         mImgDnLine = (LinearLayout) findViewById(R.id.shakeImgDown_line);
+
         mShakeLoading = (LinearLayout) findViewById(R.id.shake_loading);
+
         mResultayout = (RelativeLayout) findViewById(R.id.shake_result_layout);
         mResulImg = (ImageView) findViewById(R.id.shake_result_img);
         mResulName = (TextView) findViewById(R.id.shake_result_txt_name);
@@ -228,7 +231,6 @@ public class ShakeActivity extends BaseActivity {
         } else {
             mShakeLoading.setVisibility(View.GONE);
         }
-
     }
 
 

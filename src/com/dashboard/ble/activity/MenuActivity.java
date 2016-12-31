@@ -46,9 +46,11 @@ public class MenuActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.menu_dualcolor:
 			intent.setClass(this, FunctionActivity.class);
+			intent.putExtra("sourceType","dualcolor");
 			break;
 		case R.id.menu_rgb:
 			intent.setClass(this, FunctionActivity.class);
+			intent.putExtra("sourceType","grb");
 			break;
 		default:
 			break;

@@ -14,6 +14,7 @@ public class FunctionActivity extends BaseActivity implements View.OnClickListen
     private ImageView imgTree;
     private ImageView imgMusic;
     private ImageView imgClock;
+    private String mSourceType;
 
     @Override
     protected void onCreate() {
@@ -49,8 +50,7 @@ public class FunctionActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initViewData() {
-        // TODO Auto-generated method stub
-
+        mSourceType = getIntent().getStringExtra("sourceType");
     }
 
     @Override
@@ -83,6 +83,7 @@ public class FunctionActivity extends BaseActivity implements View.OnClickListen
     private void showLedGridActivity() {
         Intent intent = new Intent();
         intent.setClass(this, LedGridActivity.class);
+        intent.putExtra("sourceType",mSourceType);
         startActivity(intent);
     }
 

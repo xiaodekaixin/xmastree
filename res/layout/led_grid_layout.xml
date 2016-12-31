@@ -19,6 +19,7 @@
         android:layout_marginTop="@dimen/led_grid_vertial_margin"
         android:layout_marginLeft="@dimen/clock_list_horizontal_margin"
         android:layout_marginRight="@dimen/clock_list_horizontal_margin"
+        android:layout_marginBottom="30dip"
         android:numColumns="3"
         android:columnWidth="90dip"
         android:stretchMode="columnWidth"

@@ -3,6 +3,7 @@ package com.dashboard.ble.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,7 +43,7 @@ public class LedGridAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
 		if (convertView == null) {
         	convertView = mInflater.inflate(R.layout.led_item_layout, null);
@@ -55,7 +56,8 @@ public class LedGridAdapter extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 					int pos = (Integer) v.getTag(R.id.led_item_position);
-					((LedGridActivity)mContext).refreshLedGrid(pos);
+					((LedGridActivity) mContext).refreshLedGrid(pos);
+					Log.d("LedInfo", "click,pos=" + pos);
 				}
 			});
         } else {
@@ -64,9 +66,9 @@ public class LedGridAdapter extends BaseAdapter {
         final LedInfo ledInfo = mLedInfos.get(position);
         viewHolder.tvTitle.setText(ledInfo.getTitle());
         if(ledInfo.isPress()) {
-        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_logo);;
+        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_led_select);;
         } else {
-        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_launcher);;
+        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_led_default);;
         }
         return convertView;
 	}

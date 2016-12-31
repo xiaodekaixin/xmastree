@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
@@ -29,6 +30,7 @@ public class LedGridActivity extends BaseActivity {
 	private View imgBackIcon;
 	private GridView ledGridView;
 	private ImageView imgShake;
+	private String mSourceType;
 	
 	private int ledData = 0;
 	
@@ -61,13 +63,24 @@ public class LedGridActivity extends BaseActivity {
 
 	@Override
 	protected void initViewData() {
+		mSourceType =  getIntent().getStringExtra("sourceType");
+
 		ledInfos = new ArrayList<LedInfo>();
-		String[] dualColorLedTitleArray = getResources().getStringArray(R.array.dualColorLedArray);
-		for (int i = 0; i < dualColorLedTitleArray.length; i++) {
-			LedInfo ledInfo = new LedInfo(dualColorLedTitleArray[i], dualColorLedDatas[i]);
-			ledInfos.add(ledInfo);
+
+		if(mSourceType == "dualcolor") {
+			String[] dualColorLedTitleArray = getResources().getStringArray(R.array.dualColorLedArray);
+			for (int i = 0; i < dualColorLedTitleArray.length; i++) {
+				LedInfo ledInfo = new LedInfo(dualColorLedTitleArray[i], dualColorLedDatas[i]);
+				ledInfos.add(ledInfo);
+			}
+		} else {
+			String[] twelveLedArray = getResources().getStringArray(R.array.twelveLedArray);
+			for (int i = 0; i < twelveLedArray.length; i++) {
+				LedInfo ledInfo = new LedInfo(twelveLedArray[i], twelveLedDatas[i]);
+				ledInfos.add(ledInfo);
+			}
 		}
-		
+
 		ledGridAdapter = new LedGridAdapter(this, ledInfos);
 		ledGridView.setAdapter(ledGridAdapter);
 	}
@@ -77,6 +90,7 @@ public class LedGridActivity extends BaseActivity {
 			tmpLedInfo.setPress(false);
 		}
 		LedInfo ledInfo = ledInfos.get(position);
+		Log.d("LedInfo","refresh,position="+position+",ledInfo=" + ledInfo);
 		ledInfo.setPress(true);
 		ledGridAdapter.notifyDataSetChanged();
 		ledData = ledInfo.getData();

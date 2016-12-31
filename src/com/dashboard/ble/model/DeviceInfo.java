@@ -7,9 +7,7 @@ import com.lidroid.xutils.db.annotation.Table;
 
 @Table(name="bledevice")
 public class DeviceInfo extends EntityBase implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	@Column(column="address")
 	private String address;
@@ -22,7 +20,6 @@ public class DeviceInfo extends EntityBase implements Serializable{
 	
 	public DeviceInfo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public DeviceInfo(String address, String name, boolean connectState,

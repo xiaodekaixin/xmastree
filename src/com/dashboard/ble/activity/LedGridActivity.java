@@ -43,9 +43,7 @@ public class LedGridActivity extends BaseActivity {
 	@Override
 	protected void setupView() {
 		findViewById(R.id.tvTitle).setVisibility(View.GONE);
-		imgBackIcon = findViewById(R.id.imgBackIcon);
-		imgBackIcon.setVisibility(View.VISIBLE);
-		
+
 		ledGridView = (GridView)findViewById(R.id.ledGridView);
 		imgShake = (ImageView)findViewById(R.id.imgAddDevice);
 		imgShake.setVisibility(View.VISIBLE);
@@ -53,13 +51,6 @@ public class LedGridActivity extends BaseActivity {
 
 	@Override
 	protected void setViewListner() {
-		imgBackIcon.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-		
 		imgShake.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

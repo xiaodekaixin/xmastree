@@ -21,7 +21,6 @@ import com.dashboard.ble.service.MusicService;
 import java.text.SimpleDateFormat;
 
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
-    private ImageView imgBackIcon;
     private TextView chrismasTreeMusic;
     private TextView myMusic;
 
@@ -34,6 +33,8 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     private TextView musicStatus, musicTime;
     private Button btnPlayOrPause;
     private SimpleDateFormat time = new SimpleDateFormat("m:ss");
+
+    private String musicFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/demo.mp3";
 
     public android.os.Handler handler = new android.os.Handler();
 
@@ -70,6 +71,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                 musicTime.setText(time.format(currentPosition) + "/" + time.format(duration));
                 seekBar.setProgress(currentPosition);
                 seekBar.setMax(duration);
+                Log.d("hint","refresh process,position="+currentPosition+",duration="+duration);
             }
             handler.postDelayed(runnable, 200);
         }
@@ -86,8 +88,9 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         myMusic = (TextView) findViewById(R.id.myMusic);
 
         findViewById(R.id.tvTitle).setVisibility(View.GONE);
-        imgBackIcon = (ImageView) findViewById(R.id.imgBackIcon);
-        imgBackIcon.setVisibility(View.VISIBLE);
+
+        playPicture = (ImageView)findViewById(R.id.playPicture);
+        pausePicture = (ImageView)findViewById(R.id.pausePicture);
 
         seekBar = (SeekBar)this.findViewById(R.id.MusicSeekBar);
         musicStatus = (TextView)this.findViewById(R.id.MusicStatus);
@@ -103,7 +106,6 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void setViewListner() {
-        imgBackIcon.setOnClickListener(this);
         chrismasTreeMusic.setOnClickListener(this);
         myMusic.setOnClickListener(this);
 
@@ -137,9 +139,6 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         int viewId = v.getId();
         switch (viewId) {
-            case R.id.imgBackIcon:
-                finish();
-                break;
             case R.id.christmasTreeMusic:
                 break;
             case R.id.myMusic:
@@ -203,10 +202,12 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
 
     private void initMusicState() {
         if (musicService != null) {
-            seekBar.setProgress(musicService.mPlayer.getCurrentPosition());
-            seekBar.setMax(musicService.mPlayer.getDuration());
+            int currentPosition = musicService.mPlayer.getCurrentPosition();
+            int duration = musicService.mPlayer.getDuration();
+            seekBar.setProgress(currentPosition);
+            seekBar.setMax(duration);
             handler.post(runnable);
-            Log.d("hint", "handler post runnable");
+            Log.d("hint", "handler post runnable,position="+currentPosition+",duration="+duration);
         }
     }
 }

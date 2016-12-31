@@ -63,14 +63,14 @@ public class MusicService extends Service {
             }
         } else if (currentPosition <= 0) {
             playMusic();
-        } else {
+        } else if (currentPosition >= duration) {
             stopMusic();
         }
     }
 
     public void playMusic() {
         try {
-            mPlayer.stop();
+            //mPlayer.stop();
             mPlayer.reset();
             mPlayer.setDataSource(mMusicFilePath);
             mPlayer.prepare();

@@ -1,57 +1,67 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_xmastree_bg"
-    android:orientation="vertical"
-    android:padding="@dimen/menu_activity_padding" >
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/ic_xmastree_bg"
+              android:orientation="vertical"
+>
 
-    <LinearLayout
-        android:id="@+id/menu_dashboard"
-        style="@style/MenuItemStyle">
+    <include layout="@layout/main_title_layout"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher" />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="10dip"
+    >
 
-        <TextView
-            style="@style/MenuItemTitleStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/menu_dashborad" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/menu_dualcolor"
-        style="@style/MenuItemStyle">
+        <LinearLayout
+                android:id="@+id/menu_dashboard"
+                style="@style/MenuItemStyle">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher" />
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_launcher"/>
 
-        <TextView
-            style="@style/MenuItemTitleStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/menu_dualcolor" />
-    </LinearLayout>
+            <TextView
+                    style="@style/MenuItemTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/menu_dashborad"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/menu_rgb"
-        style="@style/MenuItemStyle">
+        <LinearLayout
+                android:id="@+id/menu_dualcolor"
+                style="@style/MenuItemStyle">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher" />
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_launcher"/>
 
-        <TextView
-            style="@style/MenuItemTitleStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/menu_rgb" />
+            <TextView
+                    style="@style/MenuItemTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/menu_dualcolor"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/menu_rgb"
+                style="@style/MenuItemStyle">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_launcher"/>
+
+            <TextView
+                    style="@style/MenuItemTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/menu_rgb"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

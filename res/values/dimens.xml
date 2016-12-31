@@ -17,4 +17,8 @@
     
     <dimen name="clock_list_horizontal_margin">30dip</dimen>
     <dimen name="led_grid_vertial_margin">50dip</dimen>
+
+    <dimen name="listitem_padding">8dp</dimen>
+    <dimen name="listitem_top">12dp</dimen>
+    <dimen name="layout_padding">16dp</dimen>
 </resources>

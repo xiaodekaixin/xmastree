@@ -39,7 +39,7 @@ public class DashBoardActivity extends BaseActivity implements OnClickListener{
 	private ListView lvBleDevice;
 	private TextView tvTitle;
 	private ImageView imgAddDevice;
-	private ImageView imgBackIcon;
+	private ImageView imgAboutIcon;
 	
 	private BluetoothAdapter mBluetoothAdapter;
 	private BluetoothLeService mBluetoothLeService;
@@ -64,19 +64,18 @@ public class DashBoardActivity extends BaseActivity implements OnClickListener{
 	protected void setupView() {
 		tvTitle = (TextView)findViewById(R.id.tvTitle);
 		imgAddDevice = (ImageView)findViewById(R.id.imgAddDevice);
-		imgBackIcon = (ImageView)findViewById(R.id.imgBackIcon);
+		imgAboutIcon = (ImageView)findViewById(R.id.imgAboutIcon);
 		lvBleDevice = (ListView)findViewById(R.id.lvBleDevice);
-		
-		imgBackIcon.setImageResource(R.drawable.ic_company);
-		
-		imgBackIcon.setVisibility(View.VISIBLE);
+
+		imgBackIcon.setVisibility(View.GONE);
+		imgAboutIcon.setVisibility(View.VISIBLE);
 		imgAddDevice.setVisibility(View.VISIBLE);
 	}
 	
 	@Override
 	protected void setViewListner() {
 		imgAddDevice.setOnClickListener(this);
-		imgBackIcon.setOnClickListener(this);
+		imgAboutIcon.setOnClickListener(this);
 		lvBleDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterview, View view,int id, long position) {
@@ -102,7 +101,7 @@ public class DashBoardActivity extends BaseActivity implements OnClickListener{
 
 	@Override
 	protected void initViewData() {
-		tvTitle.setText(getString(R.string.app_name));
+		tvTitle.setText("DashBoard");
 		
 		initBluetoothDevice();
 		
@@ -375,7 +374,7 @@ public class DashBoardActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.imgBackIcon:
+		case R.id.imgAboutIcon:
 			showAboutActivity();
 			break;
 		case R.id.imgAddDevice:

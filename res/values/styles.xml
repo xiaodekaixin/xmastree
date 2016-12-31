@@ -27,6 +27,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:padding">2dip</item>
     </style>
     <style name="MenuItemTitleStyle">
         <item name="android:textColor">@color/text_color</item>
@@ -69,4 +70,9 @@
         <item name="android:tag">icon</item>
         <item name="android:visibility">gone</item>
     </style>
+
+    <style name="menuItemSmallIconStyle">
+        <item name="android:layout_marginRight">15dip</item>
+    </style>
+
 </resources>

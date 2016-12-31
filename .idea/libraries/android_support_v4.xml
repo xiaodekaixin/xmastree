@@ -1,8 +1,8 @@
 <component name="libraryTable">
-  <library name="xUtils-2.6.14">
+  <library name="android-support-v4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/xUtils-2.6.14.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/xUtils-2.6.14.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

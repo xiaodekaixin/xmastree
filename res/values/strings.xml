@@ -23,6 +23,7 @@
     <string name="menu_dashborad">Dash Board</string>
     <string name="menu_dualcolor">Dual Color 12 Functions</string>
     <string name="menu_rgb">RGB 40 Functions</string>
+    <string name="menu_features">Features</string>
     
     <string name="two_hour">2 Hour</string>
     <string name="four_hour">4 Hour</string>

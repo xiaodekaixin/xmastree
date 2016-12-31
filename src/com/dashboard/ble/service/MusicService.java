@@ -24,6 +24,7 @@ public class MusicService extends Service {
 
     private String mMusicFilePath = "";
     public MediaPlayer mPlayer = new MediaPlayer();
+    private OnPlayMusicListener onPlayMusicListener;
 
     @Override
     public void onCreate() {
@@ -32,6 +33,16 @@ public class MusicService extends Service {
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             mMusicFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/demo.mp3";
         }
+        mPlayer.reset();
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                // 通知音乐播放器播放完毕
+                if(onPlayMusicListener != null) {
+                    onPlayMusicListener.onCompletion();
+                }
+            }
+        });
     }
 
     public void setMusicFilePath(String musicFilePath) {
@@ -50,27 +61,28 @@ public class MusicService extends Service {
         Log.d("hint","stop music");
     }
 
-    public void playOrPauseMusic() {
+    public void pauseMusic() {
+        mPlayer.pause();
+    }
+
+    public void playMusic() {
         int duration = mPlayer.getDuration();
         int currentPosition = mPlayer.getCurrentPosition();
         Log.d("hint", "playing music,currentPos=" + currentPosition + ",duration=" + duration);
         if (currentPosition > 0 && currentPosition < duration) {
-            // 播放已经开始
-            if (mPlayer.isPlaying()) {
-                mPlayer.pause();
-            } else {
+            if (!mPlayer.isPlaying()) {
                 mPlayer.start();
             }
-        } else if (currentPosition <= 0) {
-            playMusic();
-        } else if (currentPosition >= duration) {
-            stopMusic();
+        } else {
+            startPlayMusic();
         }
     }
 
-    public void playMusic() {
+    public void startPlayMusic() {
         try {
-            //mPlayer.stop();
+            if (mPlayer.isPlaying()) {
+                mPlayer.stop();
+            }
             mPlayer.reset();
             mPlayer.setDataSource(mMusicFilePath);
             mPlayer.prepare();
@@ -104,5 +116,13 @@ public class MusicService extends Service {
         mPlayer.stop();
         mPlayer.release();
         super.onDestroy();
+    }
+
+    public static interface OnPlayMusicListener {
+        public void onCompletion();
+    }
+
+    public void setOnPlayMusicListener(OnPlayMusicListener listener) {
+        this.onPlayMusicListener = listener;
     }
 }

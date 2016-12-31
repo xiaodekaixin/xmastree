@@ -35,7 +35,7 @@ import com.dashboard.ble.model.DeviceInfo;
 import com.dashboard.ble.service.BluetoothLeService;
 
 public class DashBoardActivity extends BaseActivity implements OnClickListener{
-	final String TAG = "MainActivity";
+	final String TAG = "DashBoardActivity";
 	private ListView lvBleDevice;
 	private TextView tvTitle;
 	private ImageView imgAddDevice;

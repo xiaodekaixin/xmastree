@@ -21,4 +21,6 @@
     <dimen name="listitem_padding">8dp</dimen>
     <dimen name="listitem_top">12dp</dimen>
     <dimen name="layout_padding">16dp</dimen>
+
+    <dimen name="menu_item_title_margin_left">15dip</dimen>
 </resources>

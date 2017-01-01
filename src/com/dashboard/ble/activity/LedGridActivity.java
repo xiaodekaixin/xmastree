@@ -27,7 +27,6 @@ public class LedGridActivity extends BaseActivity {
 			0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a,0x0b,0x0c
 	};
 	
-	private View imgBackIcon;
 	private GridView ledGridView;
 	private ImageView imgShake;
 	private String mSourceType;
@@ -67,7 +66,7 @@ public class LedGridActivity extends BaseActivity {
 
 		ledInfos = new ArrayList<LedInfo>();
 
-		if(mSourceType == "dualcolor") {
+		if(mSourceType.equals("fortyRgb")) {
 			String[] dualColorLedTitleArray = getResources().getStringArray(R.array.dualColorLedArray);
 			for (int i = 0; i < dualColorLedTitleArray.length; i++) {
 				LedInfo ledInfo = new LedInfo(dualColorLedTitleArray[i], dualColorLedDatas[i]);
@@ -90,7 +89,7 @@ public class LedGridActivity extends BaseActivity {
 			tmpLedInfo.setPress(false);
 		}
 		LedInfo ledInfo = ledInfos.get(position);
-		Log.d("LedInfo","refresh,position="+position+",ledInfo=" + ledInfo);
+		Log.d("LedInfo","refresh,position="+position+"," + ledInfo);
 		ledInfo.setPress(true);
 		ledGridAdapter.notifyDataSetChanged();
 		ledData = ledInfo.getData();

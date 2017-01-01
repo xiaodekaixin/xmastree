@@ -51,18 +51,10 @@ public class LedGridAdapter extends BaseAdapter {
         	viewHolder.imgItemLogo = (ImageView)convertView.findViewById(R.id.imgLogo);
         	viewHolder.tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
         	convertView.setTag(viewHolder);
-        	convertView.setTag(R.id.led_item_position, position);
-        	convertView.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					int pos = (Integer) v.getTag(R.id.led_item_position);
-					((LedGridActivity) mContext).refreshLedGrid(pos);
-					Log.d("LedInfo", "click,pos=" + pos);
-				}
-			});
         } else {
         	viewHolder = (ViewHolder) convertView.getTag();
         }
+		convertView.setTag(R.id.led_item_position, position);
         final LedInfo ledInfo = mLedInfos.get(position);
         viewHolder.tvTitle.setText(ledInfo.getTitle());
         if(ledInfo.isPress()) {
@@ -70,6 +62,15 @@ public class LedGridAdapter extends BaseAdapter {
         } else {
         	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_led_default);;
         }
+        
+        convertView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int pos = (Integer) v.getTag(R.id.led_item_position);
+				Log.d("LedInfo", "click,pos=" + pos);
+				((LedGridActivity) mContext).refreshLedGrid(pos);
+			}
+		});
         return convertView;
 	}
 	

@@ -9,8 +9,8 @@ import com.dashboard.ble.R;
 
 public class MenuActivity extends BaseActivity implements OnClickListener {
 	private LinearLayout mDashBoard;
-	private LinearLayout mDualColor;
-	private LinearLayout mRgb;
+	private LinearLayout mTwelveRgb;
+	private LinearLayout mFortyRgb;
 	
 	@Override
 	protected void onCreate() {
@@ -19,16 +19,16 @@ public class MenuActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void setupView() {
-		mDashBoard = (LinearLayout)findViewById(R.id.menu_dashboard);
-		mDualColor = (LinearLayout)findViewById(R.id.menu_dualcolor);
-		mRgb = (LinearLayout)findViewById(R.id.menu_rgb);
+		mDashBoard = (LinearLayout)findViewById(R.id.menuDashboard);
+		mTwelveRgb = (LinearLayout)findViewById(R.id.menuTwelveRgb);
+		mFortyRgb = (LinearLayout)findViewById(R.id.menuFortyRgb);
 	}
 
 	@Override
 	protected void setViewListner() {
 		mDashBoard.setOnClickListener(this);
-		mDualColor.setOnClickListener(this);
-		mRgb.setOnClickListener(this);
+		mTwelveRgb.setOnClickListener(this);
+		mFortyRgb.setOnClickListener(this);
 	}
 
 	@Override
@@ -41,16 +41,16 @@ public class MenuActivity extends BaseActivity implements OnClickListener {
 		Intent intent = new Intent();
 		int viewId = v.getId();
 		switch (viewId) {
-		case R.id.menu_dashboard:
+		case R.id.menuDashboard:
 			intent.setClass(this, DashBoardActivity.class);
 			break;
-		case R.id.menu_dualcolor:
+		case R.id.menuTwelveRgb:
 			intent.setClass(this, FunctionActivity.class);
-			intent.putExtra("sourceType","dualcolor");
+			intent.putExtra("sourceType","twelveRgb");
 			break;
-		case R.id.menu_rgb:
+		case R.id.menuFortyRgb:
 			intent.setClass(this, FunctionActivity.class);
-			intent.putExtra("sourceType","grb");
+			intent.putExtra("sourceType","fortyRgb");
 			break;
 		default:
 			break;

@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:attr="http://schemas.android.com/apk/res/com.dashboard.ble"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:background="@null"
@@ -13,13 +14,14 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <ImageView
+        <com.dashboard.ble.view.GifView
             android:id="@+id/imgLogo"
             android:layout_width="@dimen/led_item_icon_size"
             android:layout_height="@dimen/led_item_icon_size"
-            android:background="@drawable/ic_led_default" 
             android:contentDescription=""
-            />
+            android:src="@drawable/ic_led_default"
+            attr:auto_play="false"
+            attr:repeatCount="2" />
 
         <TextView
             android:id="@+id/tvTitle"

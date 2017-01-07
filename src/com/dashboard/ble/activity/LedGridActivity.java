@@ -48,6 +48,7 @@ public class LedGridActivity extends BaseActivity {
 		ledGridView = (GridView)findViewById(R.id.ledGridView);
 		imgShake = (ImageView)findViewById(R.id.imgAddDevice);
 		imgShake.setVisibility(View.VISIBLE);
+		imgShake.setImageResource(R.drawable.ic_shake);
 	}
 
 	@Override

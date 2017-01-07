@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dashboard.ble.R;
 import com.dashboard.ble.activity.LedGridActivity;
 import com.dashboard.ble.model.LedInfo;
+import com.dashboard.ble.view.GifView;
 
 public class LedGridAdapter extends BaseAdapter {
 	private Context mContext;
@@ -48,7 +50,7 @@ public class LedGridAdapter extends BaseAdapter {
 		if (convertView == null) {
         	convertView = mInflater.inflate(R.layout.led_item_layout, null);
         	viewHolder = new ViewHolder();
-        	viewHolder.imgItemLogo = (ImageView)convertView.findViewById(R.id.imgLogo);
+        	viewHolder.imgItemLogo = (GifView)convertView.findViewById(R.id.imgLogo);
         	viewHolder.tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
         	convertView.setTag(viewHolder);
         } else {
@@ -58,9 +60,9 @@ public class LedGridAdapter extends BaseAdapter {
         final LedInfo ledInfo = mLedInfos.get(position);
         viewHolder.tvTitle.setText(ledInfo.getTitle());
         if(ledInfo.isPress()) {
-        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_led_select);;
+        	viewHolder.imgItemLogo.setImageResource(R.drawable.demo);
         } else {
-        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_led_default);;
+        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_led_default);
         }
         
         convertView.setOnClickListener(new OnClickListener() {
@@ -75,7 +77,7 @@ public class LedGridAdapter extends BaseAdapter {
 	}
 	
 	static class ViewHolder {
-		ImageView imgItemLogo;
+		GifView imgItemLogo;
 		TextView tvTitle;
 	}
 }

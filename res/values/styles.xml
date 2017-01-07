@@ -74,5 +74,7 @@
     <style name="menuItemSmallIconStyle">
         <item name="android:layout_marginRight">15dip</item>
     </style>
+    
+    <style name="Widget.GifView" parent="@android:style/Widget"/>
 
 </resources>

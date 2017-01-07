@@ -17,6 +17,7 @@ import com.dashboard.ble.R;
 import com.dashboard.ble.activity.LedGridActivity;
 import com.dashboard.ble.model.LedInfo;
 import com.dashboard.ble.view.GifView;
+import com.dashboard.ble.view.GifView2;
 
 public class LedGridAdapter extends BaseAdapter {
 	private Context mContext;
@@ -59,11 +60,15 @@ public class LedGridAdapter extends BaseAdapter {
 		convertView.setTag(R.id.led_item_position, position);
         final LedInfo ledInfo = mLedInfos.get(position);
         viewHolder.tvTitle.setText(ledInfo.getTitle());
-        if(ledInfo.isPress()) {
-        	viewHolder.imgItemLogo.setImageResource(R.drawable.demo);
-        } else {
-        	viewHolder.imgItemLogo.setImageResource(R.drawable.ic_led_default);
-        }
+		if (ledInfo.isPress()) {
+			if (viewHolder.imgItemLogo.isPaused()) {
+				viewHolder.imgItemLogo.play();
+			}
+		} else {
+			if (viewHolder.imgItemLogo.isPlaying()) {
+				viewHolder.imgItemLogo.pause();
+			}
+		}
         
         convertView.setOnClickListener(new OnClickListener() {
 			@Override

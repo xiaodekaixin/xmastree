@@ -1,229 +1,282 @@
 package com.dashboard.ble.view;
 
-import java.io.InputStream;
-import java.lang.reflect.Field;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Movie;
+import android.os.Build;
+import android.util.AttributeSet;
+import android.view.View;
 
 import com.dashboard.ble.R;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Movie;
-import android.os.SystemClock;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
+public class GifView extends View {
 
-/**
- * PowerImageView是一个经过扩展的ImageView，它不仅继承了ImageView原生的所有功能，还加入了播放GIF动画的功能。
- * 
- * @author guolin
- */
-public class GifView extends ImageView implements OnClickListener {
-	/**
-	 * 播放GIF动画的关键类
-	 */
-	private Movie mMovie;
-	/**
-	 * 开始播放按钮图片
-	 */
-	private Bitmap mStartButton;
-	/**
-	 * 记录动画开始的时间
-	 */
-	private long mMovieStart;
-	/**
-	 * GIF图片的宽度
-	 */
-	private int mImageWidth;
+    private static final int DEFAULT_MOVIE_VIEW_DURATION = 1000;
 
-	/**
-	 * GIF图片的高度
-	 */
-	private int mImageHeight;
+    private int mMovieResourceId;
+    private Movie movie;
 
-	/**
-	 * 图片是否正在播放
-	 */
-	private boolean isPlaying;
-	
-	/**
-	 * 循环播放次数
-	 */
-	private int repeatCount;
+    private long mMovieStart;
+    private int mCurrentAnimationTime;
 
-	/**
-	 * 是否允许自动播放
-	 */
-	private boolean isAutoPlay;
 
-	/**
-	 * PowerImageView构造函数。
-	 * 
-	 * @param context
-	 */
-	public GifView(Context context) {
-		super(context);
-	}
+    /**
+     * Position for drawing animation frames in the center of the view.
+     */
+    private float mLeft;
+    private float mTop;
 
-	/**
-	 * PowerImageView构造函数。
-	 * 
-	 * @param context
-	 */
-	public GifView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
-	}
+    /**
+     * Scaling factor to fit the animation within view bounds.
+     */
+    private float mScale;
 
-	/**
-	 * PowerImageView构造函数，在这里完成所有必要的初始化操作。
-	 * 
-	 * @param context
-	 */
-	public GifView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GifView);
-		int resourceId = getResourceId(a, context, attrs);
-		if (resourceId != 0) {
-			// 当资源id不等于0时，就去获取该资源的流
-			InputStream is = getResources().openRawResource(resourceId);
-			// 使用Movie类对流进行解码
-			mMovie = Movie.decodeStream(is);
-			if (mMovie != null) {
-				// 如果返回值不等于null，就说明这是一个GIF图片，下面获取是否自动播放的属性
-				isAutoPlay = a.getBoolean(R.styleable.GifView_auto_play, false);
-				repeatCount = a.getInt(R.styleable.GifView_repeatCount, 1);
-				Bitmap bitmap = BitmapFactory.decodeStream(is);
-				mImageWidth = bitmap.getWidth();
-				mImageHeight = bitmap.getHeight();
-				bitmap.recycle();
-				if (!isAutoPlay) {
-					// 当不允许自动播放的时候，得到开始播放按钮的图片，并注册点击事件
-					mStartButton = BitmapFactory.decodeResource(getResources(),
-							R.drawable.start_play);
-					setOnClickListener(this);
-				}
-			}
-		}
-	}
+    /**
+     * Scaled movie frames width and height.
+     */
+    private int mMeasuredMovieWidth;
+    private int mMeasuredMovieHeight;
 
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == getId()) {
-			// 当用户点击图片时，开始播放GIF动画
-			isPlaying = true;
-			invalidate();
-		}
-	}
+    private volatile boolean mPaused;
+    private boolean mVisible = true;
 
-	@Override
-	protected void onDraw(Canvas canvas) {
-		if (mMovie == null) {
-			// mMovie等于null，说明是张普通的图片，则直接调用父类的onDraw()方法
-			super.onDraw(canvas);
-		} else {
-			// mMovie不等于null，说明是张GIF图片
-			if (isAutoPlay) {
-				// 如果允许自动播放，就调用playMovie()方法播放GIF动画
-				playMovie(canvas);
-				invalidate();
-			} else {
-				// 不允许自动播放时，判断当前图片是否正在播放
-				if (isPlaying) {
-					// 正在播放就继续调用playMovie()方法，一直到动画播放结束为止
-					if (playMovie(canvas)) {
-						if (repeatCount > 0) {
-							repeatCount--;
-						}
-						if (repeatCount > 0 || repeatCount == -1) {
-							Log.d("playGif", "next time,repeatCount="
-									+ repeatCount);
-							mMovie.setTime(0);
-							mMovie.draw(canvas, 0, 0);
-						} else {
-							isPlaying = false;
-						}
-					}
-					invalidate();
-				} else {
-					// 还没开始播放就只绘制GIF图片的第一帧，并绘制一个开始按钮
-					mMovie.setTime(0);
-					mMovie.draw(canvas, 0, 0);
-					int offsetW = (mImageWidth - mStartButton.getWidth()) / 2;
-					int offsetH = (mImageHeight - mStartButton.getHeight()) / 2;
-					canvas.drawBitmap(mStartButton, offsetW, offsetH, null);
-				}
-			}
-		}
-	}
+    public GifView(Context context) {
+        this(context, null);
+    }
 
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		if (mMovie != null) {
-			// 如果是GIF图片则重写设定PowerImageView的大小
-			setMeasuredDimension(mImageWidth, mImageHeight);
-		}
-	}
+    public GifView(Context context, AttributeSet attrs) {
+        this(context, attrs, R.styleable.CustomTheme_gifViewStyle);
+    }
 
-	/**
-	 * 开始播放GIF动画，播放完成返回true，未完成返回false。
-	 * 
-	 * @param canvas
-	 * @return 播放完成返回true，未完成返回false。
-	 */
-	private boolean playMovie(Canvas canvas) {
-		long now = SystemClock.uptimeMillis();
-		if (mMovieStart == 0) {
-			mMovieStart = now;
-		}
-		int duration = mMovie.duration();
-		if (duration == 0) {
-			duration = 1000;
-		}
-		Log.d("playGif", "duration="+duration);
-		int relTime = (int) ((now - mMovieStart) % duration);
-		mMovie.setTime(relTime);
-		mMovie.draw(canvas, 0, 0);
-		if ((now - mMovieStart) >= duration) {
-			mMovieStart = 0;
-			return true;
-		}
-		return false;
-	}
+    public GifView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
 
-	/**
-	 * 通过Java反射，获取到src指定图片资源所对应的id。
-	 * 
-	 * @param a
-	 * @param context
-	 * @param attrs
-	 * @return 返回布局文件中指定图片资源所对应的id，没有指定任何图片资源就返回0。
-	 */
-	private int getResourceId(TypedArray a, Context context, AttributeSet attrs) {
-		try {
-			Field field = TypedArray.class.getDeclaredField("mValue");
-			field.setAccessible(true);
-			TypedValue typedValueObject = (TypedValue) field.get(a);
-			return typedValueObject.resourceId;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (a != null) {
-				a.recycle();
-			}
-		}
-		return 0;
-	}
-	
-	public void stopMovie() {
-		isPlaying = false;
-		invalidate();
-	}
+        setViewAttributes(context, attrs, defStyle);
+    }
 
+    @SuppressLint("NewApi")
+    private void setViewAttributes(Context context, AttributeSet attrs, int defStyle) {
+
+        /**
+         * Starting from HONEYCOMB(Api Level:11) have to turn off HW acceleration to draw
+         * Movie on Canvas.
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+
+        final TypedArray array = context.obtainStyledAttributes(attrs,
+                R.styleable.GifView, defStyle, R.style.Widget_GifView);
+
+        //-1 is default value
+        mMovieResourceId = array.getResourceId(R.styleable.GifView_gif, -1);
+        mPaused = array.getBoolean(R.styleable.GifView_paused, false);
+
+        array.recycle();
+
+        if (mMovieResourceId != -1) {
+            movie = Movie.decodeStream(getResources().openRawResource(mMovieResourceId));
+        }
+    }
+
+    public void setGifResource(int movieResourceId) {
+        this.mMovieResourceId = movieResourceId;
+        movie = Movie.decodeStream(getResources().openRawResource(mMovieResourceId));
+        requestLayout();
+    }
+
+    public int getGifResource() {
+
+        return this.mMovieResourceId;
+    }
+
+
+    public void play() {
+        if (this.mPaused) {
+            this.mPaused = false;
+
+            /**
+             * Calculate new movie start time, so that it resumes from the same
+             * frame.
+             */
+            mMovieStart = android.os.SystemClock.uptimeMillis() - mCurrentAnimationTime;
+
+            invalidate();
+        }
+    }
+
+    public void pause() {
+        if (!this.mPaused) {
+            this.mPaused = true;
+
+            invalidate();
+        }
+
+    }
+
+
+    public boolean isPaused() {
+        return this.mPaused;
+    }
+
+    public boolean isPlaying() {
+        return !this.mPaused;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        if (movie != null) {
+            int movieWidth = movie.width();
+            int movieHeight = movie.height();
+
+			/*
+             * Calculate horizontal scaling
+			 */
+            float scaleH = 1f;
+            int measureModeWidth = MeasureSpec.getMode(widthMeasureSpec);
+
+            if (measureModeWidth != MeasureSpec.UNSPECIFIED) {
+                int maximumWidth = MeasureSpec.getSize(widthMeasureSpec);
+                if (movieWidth > maximumWidth) {
+                    scaleH = (float) movieWidth / (float) maximumWidth;
+                }
+            }
+
+			/*
+             * calculate vertical scaling
+			 */
+            float scaleW = 1f;
+            int measureModeHeight = MeasureSpec.getMode(heightMeasureSpec);
+
+            if (measureModeHeight != MeasureSpec.UNSPECIFIED) {
+                int maximumHeight = MeasureSpec.getSize(heightMeasureSpec);
+                if (movieHeight > maximumHeight) {
+                    scaleW = (float) movieHeight / (float) maximumHeight;
+                }
+            }
+
+			/*
+             * calculate overall scale
+			 */
+            mScale = 1f / Math.max(scaleH, scaleW);
+
+            mMeasuredMovieWidth = (int) (movieWidth * mScale);
+            mMeasuredMovieHeight = (int) (movieHeight * mScale);
+
+            setMeasuredDimension(mMeasuredMovieWidth, mMeasuredMovieHeight);
+
+        } else {
+			/*
+			 * No movie set, just set minimum available size.
+			 */
+            setMeasuredDimension(getSuggestedMinimumWidth(), getSuggestedMinimumHeight());
+        }
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+		/*
+		 * Calculate mLeft / mTop for drawing in center
+		 */
+        mLeft = (getWidth() - mMeasuredMovieWidth) / 2f;
+        mTop = (getHeight() - mMeasuredMovieHeight) / 2f;
+
+        mVisible = getVisibility() == View.VISIBLE;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        if (movie != null) {
+            if (!mPaused) {
+                updateAnimationTime();
+                drawMovieFrame(canvas);
+                invalidateView();
+            } else {
+                drawMovieFrame(canvas);
+            }
+        }
+    }
+
+    /**
+     * Invalidates view only if it is mVisible.
+     * <br>
+     * {@link #postInvalidateOnAnimation()} is used for Jelly Bean and higher.
+     */
+    @SuppressLint("NewApi")
+    private void invalidateView() {
+        if (mVisible) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                postInvalidateOnAnimation();
+            } else {
+                invalidate();
+            }
+        }
+    }
+
+    /**
+     * Calculate current animation time
+     */
+    private void updateAnimationTime() {
+        long now = android.os.SystemClock.uptimeMillis();
+
+        if (mMovieStart == 0) {
+            mMovieStart = now;
+        }
+
+        int dur = movie.duration();
+
+        if (dur == 0) {
+            dur = DEFAULT_MOVIE_VIEW_DURATION;
+        }
+
+        mCurrentAnimationTime = (int) ((now - mMovieStart) % dur);
+    }
+
+    /**
+     * Draw current GIF frame
+     */
+    private void drawMovieFrame(Canvas canvas) {
+
+        movie.setTime(mCurrentAnimationTime);
+
+        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.scale(mScale, mScale);
+        movie.draw(canvas, mLeft / mScale, mTop / mScale);
+        canvas.restore();
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    public void onScreenStateChanged(int screenState) {
+        super.onScreenStateChanged(screenState);
+        mVisible = screenState == SCREEN_STATE_ON;
+        invalidateView();
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        mVisible = visibility == View.VISIBLE;
+        invalidateView();
+    }
+
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super.onWindowVisibilityChanged(visibility);
+        mVisible = visibility == View.VISIBLE;
+        invalidateView();
+    }
+    
+    public void reset() {
+    	pause();
+    	if(movie != null) {
+    		movie.setTime(0);
+    		invalidate();
+    	}
+    }
 }

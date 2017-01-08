@@ -9,15 +9,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dashboard.ble.R;
 import com.dashboard.ble.activity.LedGridActivity;
 import com.dashboard.ble.model.LedInfo;
 import com.dashboard.ble.view.GifView;
-import com.dashboard.ble.view.GifView2;
 
 public class LedGridAdapter extends BaseAdapter {
 	private Context mContext;

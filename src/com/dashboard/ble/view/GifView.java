@@ -196,6 +196,7 @@ public class GifView extends View {
                 drawMovieFrame(canvas);
                 invalidateView();
             } else {
+            	mCurrentAnimationTime = 0;
                 drawMovieFrame(canvas);
             }
         }
@@ -240,7 +241,6 @@ public class GifView extends View {
      * Draw current GIF frame
      */
     private void drawMovieFrame(Canvas canvas) {
-
         movie.setTime(mCurrentAnimationTime);
 
         canvas.save(Canvas.MATRIX_SAVE_FLAG);

@@ -218,9 +218,11 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener,
         rotateAnimator.start();
     }
 
-    private void stopRotateAnim() {
-        rotateAnimator.end();
-    }
+	private void stopRotateAnim() {
+		if (rotateAnimator != null) {
+			rotateAnimator.end();
+		}
+	}
 
     private void bindServiceConnection() {
         Intent intent = new Intent(this, MusicService.class);
@@ -287,9 +289,10 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener,
                 if (scheme.equals("file")) {
                     musicPath = uri.toString().substring("file://".length());
                 } else if (scheme.equals("content")) {
-                    String[] proj = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = managedQuery(uri, proj, null, null, null);
-                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                	// 获取本地音乐文件列表
+					String[] projection = { MediaStore.Audio.Media.DATA };
+                    Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
                     cursor.moveToFirst();
                     musicPath = cursor.getString(columnIndex);
                 }

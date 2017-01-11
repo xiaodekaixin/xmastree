@@ -2,11 +2,9 @@ package com.dashboard.ble.activity;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import android.widget.ImageView;
 import com.dashboard.ble.R;
 
 public class SplashActivity extends BaseActivity {

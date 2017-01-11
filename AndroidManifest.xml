@@ -30,9 +30,10 @@
             android:persistent="true"
             android:theme="@style/NoTitleStyle">
         <activity
-                android:name="com.dashboard.ble.activity.SplashActivity"
+                android:name="com.dashboard.ble.activity.WebviewActivity"
                 android:configChanges="keyboardHidden|orientation"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
